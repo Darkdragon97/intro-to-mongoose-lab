@@ -35,10 +35,9 @@ const askChoice = ()=>
 
 const createCustomer= async ()=>
 {
-    const uid = prompt("Give user a unique id: ")
     const name = prompt("Customer Name: ")
     const age = prompt("Customer Age: ")
-    const customer = await Customer.create({uid, name, age})
+    const customer = await Customer.create({ name, age})
     console.log("Customer added with details:", customer)
 }
 
@@ -50,13 +49,13 @@ const viewCustomers = async () =>
 
 const updateCustomer = async () =>
 {
-    const uid = parseInt(prompt("Enter the Uid of the customer you want to update: "))
+    const customerId = prompt("Enter Customer ID to update: ");
 
     const name = prompt("Enter the New Name for the Customer: ")
 
     const age = prompt("Enter the new age for the Customer: ")
 
-    const updatedCustomer = await Customer.findOneAndUpdate({uid}, {name, age})
+    const updatedCustomer = await Customer.findByIdAndUpdate(customerId, {name, age})
 
     console.log("Customer Updated!")
 
@@ -64,9 +63,9 @@ const updateCustomer = async () =>
 
 const deleteCustomer = async () =>
 {
-    const uid = prompt("Enter the Uid of the Customer you want to delete: ")
+    const customerId = prompt("Enter Customer ID to delete: ")
 
-    const deletedCustomer = await Customer.findOneAndDelete({uid})
+    const deletedCustomer = await Customer.findOneAndDelete(customerId)
     console.log("Customer Deleted!", deletedCustomer)
 }
 
